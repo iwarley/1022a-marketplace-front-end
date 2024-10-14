@@ -1,35 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
 import './App.css'
-
+type ProdutoType = {
+  id:number,
+  nome:string,
+  preco:string,
+  descricao:string,
+  imagem:string
+}
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [nome, setNome] = useState("")
+  const [produtos,setProdutos] = useState([])
+  //useEffects(O que fazer, quando fazer) []=> Hora do carregamento
+useEffect(()=>{
+  setNome("iwarley quelis pique")
+  //buscar os dados do backend
+  fetch("https://one022a-marketplace1.onrender.com/produtos")
+  .then(resposta=>resposta.json())
+  .then(dados=>setProdutos(dados))
+  //colocar em uma variavel
+},[])
+{  
+  produtos.map(produto =>)
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>{nome}</h1>
+      <div className='produtos-container'>
+        <div className='produto-item'>
+          <h1>Nome</h1>
+          <p>Imagem</p>
+          <p>Preço</p>
+          <p>Descrição</p>
+        </div>
+      </div> 
     </>
   )
-}
+}}
+
 
 export default App
